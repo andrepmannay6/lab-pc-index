@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>世界足球盛会 · 世界杯专题</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(145deg, #f4f9fc 0%, #e2eff6 100%);
+      color: #1f3a42;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1140px;
+      width: 100%;
+    }
+
+    /* Hero 横幅 */
+    .hero {
+      background: linear-gradient(135deg, #0c515b 0%, #1c7481 50%, #2b8d9b 100%);
+      padding: 3.8rem 2rem;
+      border-radius: 2rem 2rem 1rem 1rem;
+      box-shadow: 0 20px 30px -8px rgba(0, 60, 70, 0.3);
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      color: white;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      color: #d4f0f5;
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin-top: 0.8rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .sub-meta {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(4px);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      color: #c7edf5;
+      font-size: 0.85rem;
+      margin-top: 1.4rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 网格卡片 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin: 2.8rem 0;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(2px);
+      border-radius: 1.6rem;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 6px 16px rgba(8, 68, 78, 0.06);
+      border: 1px solid rgba(50, 140, 150, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(8, 68, 78, 0.1);
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #0b5460;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card h3 span {
+      display: inline-block;
+      background: #2b8d9b;
+      color: white;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.7rem;
+      border-radius: 30px;
+      letter-spacing: 0.3px;
+    }
+
+    .card p {
+      color: #1f4a55;
+      font-size: 0.95rem;
+    }
+
+    /* 背景说明 + 三段自然介绍 */
+    .intro-block {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(2px);
+      border-radius: 2rem;
+      padding: 2.2rem 2rem;
+      margin: 2.8rem 0;
+      box-shadow: 0 4px 12px rgba(0, 40, 50, 0.04);
+    }
+
+    .intro-block h2 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #094b57;
+      border-left: 6px solid #2b8d9b;
+      padding-left: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .intro-content p {
+      font-size: 1rem;
+      color: #1b414b;
+    }
+
+    .intro-content .highlight {
+      background: rgba(43, 141, 155, 0.08);
+      padding: 0.1rem 0.3rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .faq-mini {
+      margin: 3rem 0;
+    }
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(2px);
+      border-radius: 1.2rem;
+      padding: 1.2rem 1.5rem;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(50, 140, 150, 0.06);
+    }
+
+    .faq-item strong {
+      color: #094b57;
+      display: block;
+      margin-bottom: 0.3rem;
+      font-size: 1.05rem;
+    }
+
+    .faq-item p {
+      color: #204b55;
+      font-size: 0.95rem;
+    }
+
+    /* 页尾访问提示 */
+    .footer-note {
+      background: #0c515b;
+      border-radius: 2rem;
+      padding: 2.4rem 2rem;
+      margin-top: 3rem;
+      color: #d4eef2;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      box-shadow: 0 10px 20px -6px rgba(0, 50, 60, 0.3);
+    }
+
+    .footer-note p {
+      font-size: 1rem;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .footer-note a {
+      color: #b5e6f0;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid #56b7c9;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .footer-note a:hover {
+      color: white;
+      border-bottom-color: #a3dee9;
+    }
+
+    .footer-note .badge {
+      background: rgba(255,255,255,0.08);
+      padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      body {
+        padding: 1.2rem 0.8rem;
+      }
+      .hero {
+        padding: 2.8rem 1.2rem;
+        border-radius: 1.4rem;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .intro-block {
+        padding: 1.6rem 1.2rem;
+      }
+      .grid {
+        gap: 1.2rem;
+      }
+      .footer-note {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.8rem 1.2rem;
+      }
+      .footer-note .badge {
+        align-self: center;
+      }
+      .card {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .hero p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Hero 横幅 -->
+  <header class="hero">
+    <h1>再次聚焦 · 世界杯</h1>
+    <p>从赛场到屏幕，持续关注全球顶级足球盛事。每一次回访都意味着更深的热爱与更完整的体验。</p>
+    <span class="sub-meta">专题 · 收藏 · 再发现</span>
+  </header>
+
+  <!-- 背景说明 + 三段自然介绍 融合 -->
+  <section class="intro-block">
+    <h2>持续关注，不止于比赛</h2>
+    <div class="intro-content">
+      <p>
+        <span class="highlight">回到一个熟悉的信息枢纽</span>，意味着你不需要重新适应。本站整合了历届赛事数据、球队动态与深度分析，是许多球迷反复访问的参考坐标。无论你是想回顾经典对决，还是追踪最新预选赛走势，这里都提供结构清晰的内容路径。
+      </p>
+      <p>
+        收藏这个页面，相当于为自己保留一扇直达核心资讯的窗口。赛事日历、分组形势、关键球员记录——这些模块都经过持续更新与优化。当你再次打开时，会发现界面布局更贴合阅读习惯，信息层级也更为分明。
+      </p>
+      <p>
+        <span class="highlight">足球世界从不缺少话题</span>，而一个可信赖的起点能帮你节省大量筛选时间。从小组赛战术拆解到淘汰赛心理博弈，我们的内容团队保持克制的叙述节奏，不煽情不浮夸，只提供经得起推敲的事实。这或许正是你愿意反复回来的理由。
+      </p>
+    </div>
+  </section>
+
+  <!-- 网格卡片：特点 / 场景 -->
+  <div class="grid">
+    <div class="card">
+      <h3>📌 收藏级整理 <span>特点</span></h3>
+      <p>赛事时间线、交锋记录、射手榜演变——信息按赛季与阶段分类，方便对比查阅。无论你是新球迷还是老观众，都能快速定位到感兴趣的区域。</p>
+    </div>
+    <div class="card">
+      <h3>🔄 持续迭代 <span>场景</span></h3>
+      <p>每次访问都可能发现微调：更合理的导航分组、更清晰的赛程卡片、更快的加载体验。我们不追求颠覆，而是在细节上逐渐接近理想的信息交互。</p>
+    </div>
+    <div class="card">
+      <h3>🌐 跨屏适应 <span>体验</span></h3>
+      <p>在手机、平板或桌面端均保持一致的阅读舒适度。图文比例、字体大小、触控区域都经过针对性设计，让你在任何设备上都能顺畅浏览。</p>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-mini">
+    <div class="faq-item">
+      <strong>❓ 为什么值得再次访问？</strong>
+      <p>因为信息在更新，结构在优化。每次回访都可能获得新的内容或更顺畅的浏览体验，同时你熟悉的布局又不会让你感到陌生。</p>
+    </div>
+    <div class="faq-item">
+      <strong>❓ 如何保持长期关注？</strong>
+      <p>你可以通过浏览器书签收藏本页，或记住域名。我们建议定期回看，尤其是在大赛周期前后，内容密度会有明显提升。</p>
+    </div>
+  </div>
+
+  <!-- 页尾访问提示 -->
+  <footer class="footer-note">
+    <p>
+      如果你已经准备好继续这段旅程，可以直接前往 
+      <a href="https://pc-index-worldcup.com">世界杯</a> 
+      专题页。那里集合了更完整的赛程、深度报道与历史数据库，所有内容均保持客观克制的编辑风格。
+    </p>
+    <span class="badge">⚽ 收藏 · 再访 · 持续</span>
+  </footer>
+
+</div>
+</body>
+</html>
